@@ -1,8 +1,8 @@
 const { publishEvent } = require("../utils/rabbitmq");
 
-const productcreated = async (product) =>{
-    await publishEvent("PRODUCT_CREATED",product);
+const productCreated = async (product) => {
+    await publishEvent("PRODUCT_CREATED", product);
 
 };
 
-module.exports = {productCreated};
+module.exports = { productCreated };

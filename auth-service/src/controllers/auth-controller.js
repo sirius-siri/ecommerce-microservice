@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const bcrypt = require("bcrypt.js");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const {publishEvent} = require("../utils/rabbitmq");
 
@@ -21,6 +21,7 @@ exports.register = async(req,res) => {
 
         res.status(201).json({message:"User registered"});
     } catch(err){
+        console.error("Registration error:", err);
         res.status(500).json({message:"Server error"});
     }
 };
@@ -45,7 +46,8 @@ exports.login = async (req,res) => {
         );
         res.json({token});
 
-    } catch{
+    } catch (err) {
+        console.error("Login error:", err);
         res.status(500).json({message:"Server error"});
     }
 

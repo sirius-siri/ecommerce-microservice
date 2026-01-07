@@ -8,11 +8,11 @@ const connectRabbitMQ = async () => {
 
 };
 
-const publishEvent = async (queue,data) => {
-    if(!channel) await connectRabbitMQ();
-    await channel.assertQueue(queue);
-    channel.sendToQueue(queue,Buffer.from(JSON.stringigy(data)));
+const publishEvent = async (queue, data) => {
+    if (!channel) await connectRabbitMQ();
+    await channel.assertQueue(queue, { durable: true });
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(data)));
 
 };
 
-module.exports = {publishEvent};
+module.exports = { publishEvent };
